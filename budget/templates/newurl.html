@@ -1,0 +1,41 @@
+<html>
+
+<button id="linkButton">Open Plaid Link</button>
+<script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+{% csrf_token %}
+<script>
+var linkHandler = Plaid.create({
+  env: 'sandbox',
+  clientName: 'Gene Test',
+  key: 'a9536dd5db33d7bbbdb096c56a1593',
+  product: ['auth'],
+  selectAccount: true,
+  onSuccess: function(public_token, metadata) {
+    console.log('public_token: ' + public_token);
+    console.log('metadata: ' + JSON.stringify(metadata));
+
+    // Send the public_token and account ID to your app server.
+    var $form = $('<form>', {
+      'action': '/newurl',
+      'method': 'POST'
+    }).append($('<input>', {
+      'name': 'public_token',
+      'value': public_token,
+      'type': 'hidden'
+    })).append($('<input>', {
+      'name': 'account_id',
+      'value': metadata.account.id,
+      'type': 'hidden'
+    }));
+    $(document.body).append($form);
+    console.log(form);
+    $form.submit();
+  },
+});
+
+// Trigger the Link UI
+$("#linkButton").click(function() {linkHandler.open();
+});
+
+</script>
