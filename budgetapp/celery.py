@@ -4,7 +4,7 @@ from celery import Celery
 
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'budgetapp.settings')
-
+BASE_REDIS_URL = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379')
 app = Celery('budgetapp')
 
 # Using a string here means the worker doesn't have to serialize
