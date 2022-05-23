@@ -267,6 +267,10 @@ def dashboard(request):
         "threesixpercentreadable": str(threesixpercentreadable),
     })
 
+def homepage(request):
+
+    return render(request, 'homepage.html')
+
 
 def index(request):
     global access_token
