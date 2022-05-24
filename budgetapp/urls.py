@@ -23,13 +23,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
     path('newurl', views.newurl, name='newurl'),
     path('budget', views.budget, name='budget'),
     path('results', views.results, name='results'),
     path('email', views.email, name='email'),
     path('dashboard', views.dashboard, name='dashboard'),
     path('transactions', views.transactions, name='transactions'),
-    path('homepage', views.homepage, name='homepage'),
+    path('', views.homepage, name='homepage'),
+    path('setup', views.index, name='index'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
