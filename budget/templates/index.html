@@ -42,7 +42,7 @@ var linkHandler = Plaid.create({
   onSuccess: function(public_token, metadata) {
     // Send the public_token and account ID to your app server.
     var $form = $('<form>', {
-      'action': '/',
+      'action': '/setup',
       'method': 'POST'
     }).append($('<input>', {
       'name': 'public_token',
