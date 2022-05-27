@@ -39,8 +39,8 @@ def spendeval(x):
 configuration = plaid.Configuration(
     host=plaid.Environment.Development,
     api_key={
-        'clientId': os.environ.get("PLAIDCLIENTID"),
-        'secret': os.environ.get("PLAIDSECRET"),
+        'clientId': '5aa566848d92394b18d3b921',
+        'secret': '3255281e09e4d7725cdf8da1c25c8b',
     }
 )
 
