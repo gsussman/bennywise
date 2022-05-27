@@ -273,8 +273,8 @@ def homepage(request):
 
 
 def index(request):
-#    global access_token
-#
+    global access_token
+
     user = request.user
     if request.method == 'POST':
         formdata = request.POST
