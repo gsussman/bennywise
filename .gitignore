@@ -4,4 +4,4 @@ sendgrid.env
 db.sqlite3
 *.pyc
 dump.rdb
-celerybeat-schedule.db
+*.db

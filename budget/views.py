@@ -39,8 +39,8 @@ def spendeval(x):
 configuration = plaid.Configuration(
     host=plaid.Environment.Development,
     api_key={
-        'clientId': '5aa566848d92394b18d3b921',
-        'secret': '3255281e09e4d7725cdf8da1c25c8b',
+        'clientId': os.environ.get("PLAIDCLIENTID"),
+        'secret': os.environ.get("PLAIDSECRET"),
     }
 )
 
@@ -273,8 +273,8 @@ def homepage(request):
 
 
 def index(request):
-    global access_token
-
+#    global access_token
+#
     user = request.user
     if request.method == 'POST':
         formdata = request.POST
@@ -315,11 +315,10 @@ def index(request):
                 new_acct.item = plaid_item
                 new_acct.save()
                 print('new account')
-            update_transactions.delay()
+            update_transactions.apply_async(countdown=5)
     printaccounts = Account.objects.filter(user=user)
     print(printaccounts)
     return render(request, 'index.html', {'printaccounts': printaccounts})
-
 
 def newurl(request):
     global access_token
