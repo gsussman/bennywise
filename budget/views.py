@@ -284,9 +284,7 @@ def index(request):
         accounts = metadata['accounts']
         print(metadata['accounts'])
         print(metadata['institution'])
-        exchange_request = ItemPublicTokenExchangeRequest(
-            public_token=public_token
-        )
+        exchange_request = ItemPublicTokenExchangeRequest(public_token=public_token)
         exchange_response = client.item_public_token_exchange(exchange_request)
         print(exchange_response)
         access_token = exchange_response['access_token']
