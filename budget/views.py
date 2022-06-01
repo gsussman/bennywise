@@ -16,7 +16,10 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.contrib.auth import get_user_model
 from budget.tasks import *
-
+import environ
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 def spendeval(x):
     if x >= .99 and x <= 1.01:
@@ -39,8 +42,8 @@ def spendeval(x):
 configuration = plaid.Configuration(
     host=plaid.Environment.Sandbox,
     api_key={
-        'clientId': os.environ.get("PLAIDCLIENTID"),
-        'secret': os.environ.get("PLAIDSECRET"),
+        'clientId': env('PLAIDCLIENTID'),
+        'secret': env('PLAIDSECRET'),
     }
 )
 
@@ -49,8 +52,8 @@ client = plaid_api.PlaidApi(api_client)
 # Create your views here.
 # Global access token (workaround to make this demo simple)
 # Should be stored in a database that relates access token to user account
-#access_token = None
-#item_id = None
+access_token = None
+item_id = None
 
 def dashboard(request):
     todaydate = 'No Data'
@@ -273,7 +276,7 @@ def homepage(request):
 
 
 def index(request):
-#    global access_token
+    global access_token
 
     user = request.user
     if request.method == 'POST':

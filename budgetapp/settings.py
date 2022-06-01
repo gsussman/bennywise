@@ -14,6 +14,7 @@ from pathlib import Path
 from celery import Celery
 from celery.schedules import crontab
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +31,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['178.128.151.203','*']
 
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 # Application definition
 
