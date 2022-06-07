@@ -135,3 +135,4 @@ SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 
 SENDGRID_SANDBOX_MODE_IN_DEBUG=False
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
